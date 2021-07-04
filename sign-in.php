@@ -1,6 +1,8 @@
 <?php
 	session_start();
-	$_SESSION['loggedIn'] = true;
+	$_SESSION['loggedIn'] = false;
+	$_SESSION['username'];
+	$_SESSION['password'];
 	
 ?>
 
@@ -16,7 +18,7 @@
 <body>
 	<div class="center">
 		<h2>Login</h2>
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER[PHP_SELF]); ?>">
+		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>">
 			 <div class="txt_field">
 			 	<input type="text" name="username" required>
 			 	<span></span>
@@ -47,17 +49,21 @@
 		// validate username
 		if (empty(trim($_POST['username']))) {
 			$username_err = 'Please enter a username';
+			echo $username_err;
 		} elseif (!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
 			$username_err = "User name can only contain numbers, letters and underscore";
+			echo $username_err;
 		} elseif ($username == $_SESSION['username']) {
 			echo $username;
 		}
 
 		// validate password
 		if(empty(trim($_POST["password"]))){
-	        $password_err = "Please enter a password.";     
+	        $password_err = "Please enter a password.";  
+	        echo $password_err;   
 	    } elseif(strlen(trim($_POST["password"])) < 6){
 	        $password_err = "Password must have atleast 6 characters.";
+	        echo $password_err;
 	    } else{
 	        $password = trim($_POST["password"]);
 	        $hash_password = password_hash($password, PASSWORD_DEFAULT);

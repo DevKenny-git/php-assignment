@@ -1,7 +1,7 @@
 <?php
  session_start();
  $username = $_SESSION['username'];
- 
+
 ?>
 
 
@@ -15,7 +15,7 @@
 </head>
 <body>
 	<?php
-		echo "<h2>Welcome ". $_SESSION['username'] . "<h2>";
+		echo "<h2>Welcome ". $username . "<h2>";
 		if ($_SESSION['loggedIn'] == true) {
 			echo "You are logged In";
 		}
